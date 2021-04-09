@@ -1,13 +1,18 @@
 {
   "name": "gh-actions-experiments",
-  "version": "0.4.6",
+  "version": "0.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release:minor": "npm version minor && npm run create-release-branch",
+    "release:patch": "npm version minor && npm run release:next-steps",
+    "release:minor": "npm version minor && npm run release:next-steps",
+    "release:major": "npm version minor && npm run release:next-steps",
+    "release:next-steps": "echo BUILDING HERE && npm run create-release-branch && npm run create-release-pr && npm run publish",
     "create-release-branch": "git checkout -b RC/$(git describe --abbrev=0 --tags)",
-    "create-release-pr": "gh pr create --title \"Pull request title\" --body \"Pull request body\""
+    "create-release-pr": "git push --follow-tags origin HEAD && gh pr create --title \"Release $(git describe --abbrev=0 --tags)\" --body \"Lets release this beautiful code!\"",
+    "publish": "echo PUBLISHING HERE",
+    "cleanup": "git checkout main"
   },
   "repository": {
     "type": "git",
