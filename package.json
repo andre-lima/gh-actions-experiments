@@ -10,7 +10,7 @@
     "release:major": "npm version minor && npm run release:next-steps",
     "release:next-steps": "echo BUILDING HERE && npm run create-release-branch && npm run create-release-pr && npm run publish",
     "create-release-branch": "git checkout -b RC/$(git describe --abbrev=0 --tags)",
-    "create-release-pr": "git push --follow-tags origin HEAD && git push gh pr create --title \"Release $(git describe --abbrev=0 --tags)\" --body \"Lets release this beautiful code!\"",
+    "create-release-pr": "git push --follow-tags origin HEAD && gh pr create --title \"Release $(git describe --abbrev=0 --tags)\" --body \"Lets release this beautiful code!\"",
     "publish": "echo PUBLISHING HERE",
     "cleanup": "git checkout main"
   },
