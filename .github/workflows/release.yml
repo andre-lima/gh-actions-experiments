@@ -17,6 +17,6 @@ jobs:
         uses: release-drafter/release-drafter@v5
         with:
           tag: ${{ env.GIT_TAG }}
-          name: Release ${{ env.GIT_TAG }} 🔥
+          name: Release ${{ env.GIT_TAG }} (🔥)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
