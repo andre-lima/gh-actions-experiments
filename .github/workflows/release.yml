@@ -18,5 +18,5 @@ jobs:
         with:
           tag: ${{ env.GIT_TAG }}
           name: Release ${{ env.GIT_TAG }} 🌈
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
