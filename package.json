@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release:minor": "npm version minor && git checkout -b RC/$(git describe --abbrev=0 --tags)"
+    "release:minor": "npm version minor && npm run create-release-branch",
+    "create-release-branch": "git checkout -b RC/$(git describe --abbrev=0 --tags)"
   },
   "repository": {
     "type": "git",
