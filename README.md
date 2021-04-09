@@ -1,3 +1,3 @@
 # gh-actions-experiments
 
-lets release
+lets gh
