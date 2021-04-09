@@ -11,17 +11,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
-      - uses: little-core-labs/get-git-tag@v3.0.1
-        id: tagName
-      # - name: Set env
-      #   run: |
-      #     echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-      #     echo $GIT_TAG
+      - name: Set env
+        run: echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
       - name: Draft release notes
         uses: release-drafter/release-drafter@v5
         with:
-          tag: ${{ steps.tagName.outputs.tag }}
-          version: ${{ steps.tagName.outputs.tag }}
-          name: Release ${{ steps.tagName.outputs.tag }} (🔥)
+          tag: ${{ env.GIT_TAG }}
+          version: ${{ env.GIT_TAG }}
+          name: Release ${{ env.GIT_TAG }} (🔥)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
