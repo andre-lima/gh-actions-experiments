@@ -1,3 +1,3 @@
 # gh-actions-experiments
 
-lets gh
+doing as it shoudl be
