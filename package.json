@@ -13,7 +13,7 @@
     "create-release-pr": "git push origin HEAD && gh pr create --label release --title \"Release $(git describe --tags --abbrev=0)\" --body \"Lets release this beautiful code!\"",
     "publish": "echo PUBLISHING HERE",
     "cleanup": "echo ------ END ------",
-    "pr-dry": "GIT_TAG=`echo $(git describe --tags --abbrev=0)` && gh pr create --label release --title \"Release $(GIT_TAG)\" --body \"Lets release this beautiful code!\""
+    "pr-dry": "GIT_TAG=`echo $(git describe --tags --abbrev=0)` && gh pr create --label release --title \"Release `echo $GIT_TAG`\" --body \"Lets release this beautiful code!\""
   },
   "repository": {
     "type": "git",
