@@ -1,3 +1,3 @@
 # gh-actions-experiments
 
-doing as it shoudl
+doing as it shoudl be
