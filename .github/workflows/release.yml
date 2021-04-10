@@ -1,23 +1,20 @@
 name: Release Drafter
 
-# on:
-#   push:
-#     branches:
-#       - main
-
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types: [closed]
+
+# on:
+#   pull_request:
+#     branches:
+#       - main
+#     types: [closed]
 
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
-    # if: ${{ (github.event.pull_request.merged == true) && (github.event.pull_request.label == 'release') }}
     steps:
-      - run: echo ${{github.event.pull_request.merged}}
-      - run: echo ${{github.event.pull_request.label}}
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
       - name: Set env
