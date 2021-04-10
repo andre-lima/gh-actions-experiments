@@ -14,11 +14,10 @@ on:
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
-    run: |
-      echo ${{github.event.pull_request.merged}}
-      echo ${{github.event.pull_request.label}}
     # if: ${{ (github.event.pull_request.merged == true) && (github.event.pull_request.label == 'release') }}
     steps:
+      - run: echo ${{github.event.pull_request.merged}}
+      - run: echo ${{github.event.pull_request.label}}
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
       - name: Set env
