@@ -1,6 +1,6 @@
 {
   "name": "gh-actions-experiments",
-  "version": "3.2.0",
+  "version": "3.3.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,10 @@
     "release:minor": "npm version minor && npm run release:next-steps",
     "release:major": "npm version major && npm run release:next-steps",
     "release:next-steps": "git push --tags && GIT_TAG=`echo $(git describe --tags --abbrev=0)` && echo RELEASING $GIT_TAG && echo BUILDING HERE && npm run create-release-branch && npm run create-release-pr && npm run publish && npm run cleanup",
-    "create-release-branch": "git checkout -b RC/`echo $GIT_TAG`",
-    "create-release-pr": "git push origin HEAD && gh pr create --label release --title \"Release \"Release `echo $GIT_TAG`\"\" --body \"Lets release this beautiful code!\"",
+    "create-release-branch": "git checkout -b RC/$(git describe --tags --abbrev=0)",
+    "create-release-pr": "git push origin HEAD && gh pr create --label release --title \"Release $(git describe --tags --abbrev=0)\" --body \"Lets release this beautiful code!\"",
     "publish": "echo PUBLISHING HERE",
-    "cleanup": "echo ------ END ------",
-    "pr-dry": "GIT_TAG=`echo $(git describe --tags --abbrev=0)` && git checkout -b RC/`echo $GIT_TAG`"
+    "cleanup": "echo ------ END ------"
   },
   "repository": {
     "type": "git",
