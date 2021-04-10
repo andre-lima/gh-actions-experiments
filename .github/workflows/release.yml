@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     # if: ${{ (github.event.pull_request.merged == true) && (github.event.pull_request.label == 'release') }}
     steps:
-      - run: echo ${{toJson(github.event.pull_request)}}
+      - env:
+        PR_CONTEXT: ${{ toJson(github.event.pull_request) }}
+      - run: echo "$PR_CONTEXT"
       - uses: actions/checkout@v2
       - run: git fetch --prune --unshallow --tags
       - name: Set env
