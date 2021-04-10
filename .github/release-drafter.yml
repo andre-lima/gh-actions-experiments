@@ -1,6 +1,6 @@
 change-template: '- $TITLE (#$NUMBER)'
 template: |
-  _Before doing this release, make sure to verify the tag number_
+  <!-- Before doing this release, make sure to verify the tag number -->
 
   ## What’s Changed
 
