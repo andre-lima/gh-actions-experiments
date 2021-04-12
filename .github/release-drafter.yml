@@ -1,6 +1,7 @@
 change-template: '- $TITLE (#$NUMBER) @$AUTHOR'
 exclude-labels:
   - 'release'
+  - 'skip_changelog'
 template: |
   <!-- Before doing this release, make sure to verify the tag number -->
 
