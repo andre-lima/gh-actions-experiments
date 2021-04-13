@@ -1,3 +1,3 @@
 # gh-actions-experiments
 
-notroc
+automation demo
