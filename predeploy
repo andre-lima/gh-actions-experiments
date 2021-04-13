@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# Exit if any subcommand fails
+set -e
+
+read -p "This script will remove unsaved changes and take you to master, are you sure you want to continue? (y/n)? `echo $'\n> '`" CONT
+
+if [ "$CONT" = "y" ]; then
+
+  # remove unstaged changes
+  echo "removing unstashed work"
+  git checkout . --quiet
+
+  # swtich to master when not already on master
+  current_branch=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$current_branch" != "master" ]]; then
+    echo "going to master"
+    git checkout master --quiet
+  fi
+
+  # pull current master
+  echo "pulling master from origin"
+  git pull --rebase origin master --quiet
+
+  # fetch tags
+  echo "fetching tags from origin..."
+  if [[ `git fetch --tags --quiet` != 0 ]]; then
+    echo "failed to fetch the latest tags!"
+    echo "You may need to delete your local copies of tags."
+    git fetch --tags
+  fi
+
+  echo "discovering latest deployed tag"
+
+  # get last deployed tag
+  last_version=$(git describe --tags `git rev-list --tags --max-count=1`)
+
+  # get the current version of release
+  read -p "What is the new release version? (last version was ${last_version}) `echo $'\n> '`" new_version
+
+  # create release branch and go to it
+  git checkout -b "rc/$new_version"
+
+  # get the pull request titles from last tag to release branch and grep out RELEASE commit
+  version_diff=$(git log --pretty='format:%s' --invert-grep --grep=RELEASE --grep=release ${last_version}...${release_branch})
+  echo "$version_diff"
+
+  # remove release file if any
+  [ -e RELEASE.md ] && rm RELEASE.md
+
+  # create release file
+  touch RELEASE.md
+
+  read -p "Please choose an adjective followed by an animal name example: Violent Dog...`echo $'\n> '`" release_name
+  # add content to release file
+  echo "$new_version $release_name" >> RELEASE.md
+  echo "$version_diff" >> RELEASE.md
+  echo "Version diff added to RELEASE.md"
+else
+  echo "exiting predeploy, see ya!";
+fi
